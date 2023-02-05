@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 import com.example.demo.model.Photo;
 import com.example.demo.service.PhotozService;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ public class DownloadController {
         this.photozService = photozService;
     }
     @GetMapping("/download/{id}")
-    public ResponseEntity<byte[]> download(@PathVariable String id){
+    public ResponseEntity<byte[]> download(@PathVariable Integer id){
         Photo photo = photozService.get(id);
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         byte[] data = photo.getData();
